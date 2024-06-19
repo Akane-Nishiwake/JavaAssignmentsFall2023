@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+import javax.swing.*;
 
-public class AssignmentMethods {
+public class AssignmentMethods
+{
     static void Assignment02() {
         ArrayList<Double> list = new ArrayList<Double>(Arrays.asList(1.5, 2.35, -4.7, 0.01)); //creating the ArrayList
         String newHeaderFormat = "-------------------\n| %-16s| \n-------------------\n"; //header formatting
@@ -91,5 +93,19 @@ public class AssignmentMethods {
 
     }
 
+    static void Assignment05()
+    {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                constructGUI();} //calls the constructGUI method
+        });
+    }
+    static void constructGUI() //this method creates a MyFram object that calls the initialization of my JFrame
+    {
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        MyFrame frame = new MyFrame();
+        frame.setVisible(true);
+
+    }
 }
 
