@@ -116,7 +116,7 @@ public class AssignmentMethods
                     e.printStackTrace();
                 }
             }
-            read.close(); //close the file
+            //read.close(); //close the file
         } catch (IOException e) //if the file cannot be read throw an exception
         {
             e.printStackTrace();
@@ -131,7 +131,7 @@ public class AssignmentMethods
             {
                 write.println(num.toString());
             }
-            write.close(); //close the file
+            //write.close(); //close the file
         }catch (IOException e) //exception thrown if file creation or finding fails
         {
             e.printStackTrace();
