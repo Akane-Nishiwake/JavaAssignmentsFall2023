@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+
 class MyFrame extends JFrame
 {
     public JTextField firstNumber;
@@ -65,15 +65,14 @@ class MyFrame extends JFrame
         double res = 0.00;
         String option = (String) dropDownBox.getSelectedItem();
         //performs the desired operation
+        assert option != null;
         res = switch (option) {
             case "Add" -> firstNum + secondNum;
             case "Subtract" -> firstNum - secondNum;
             case "Multiply" -> firstNum * secondNum;
             case "Division" -> firstNum / secondNum;
             case "Remainder" -> firstNum % secondNum;
-            default -> {
-                yield res;
-            }
+            default -> res;
         };
         //sets the result to the result of the operation.
         result.setText(Double.toString(res));

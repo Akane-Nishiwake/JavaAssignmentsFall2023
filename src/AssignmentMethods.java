@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import javax.swing.*;
+//import java.sql.*;
 
 public class AssignmentMethods
 {
@@ -103,12 +104,64 @@ public class AssignmentMethods
                 constructGUI();} //calls the constructGUI method
         });
     }
-    static void constructGUI() //this method creates a MyFram object that calls the initialization of my JFrame
+    static void constructGUI() //this method creates a MyFrame object that calls the initialization of my JFrame
     {
         JFrame.setDefaultLookAndFeelDecorated(true);
         MyFrame frame = new MyFrame();
         frame.setVisible(true);
 
+    }
+
+//Assignment07 is commented out due to the fact that there is no SQL table made to run with it in this project
+//The assignment turned in did have a table that it connected to however I decided not to recreate it.
+
+//    static void Assignment07() {
+//        //create formating for the table
+//        String format = "+----------------------------------------+\n| %25s	         |\n+--------------+------------+------------+\n| %-12s | %-10s | %-10s |\n+--------------+------------+------------+\n";
+//        String formatEmployee = "| %-12s | %-10s | %-10s |\n+--------------+------------+------------+\n";
+//        //create variables to be used to capture the table data
+//        Connection connection;
+//        ResultSet results = null;
+//        Statement stmnt;
+//        try //try to find the server
+//        {
+//            try //try to find the driver
+//            {
+//                Class.forName("com.mysql.cj.jdbc.Driver");
+//            } catch (ClassNotFoundException e) {
+//                e.printStackTrace();
+//            }
+//            //create a connection from the driver if the driver has been found
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "root", "cop2805");
+//            //create the statement to be able to form queries to the database
+//            stmnt = connection.createStatement();
+//            //add the lines of code to send the statement "SELECT * from Employees;" and catch the result.
+//            results = stmnt.executeQuery("SELECT * FROM Employees;");
+//            System.out.printf(format, "Employees", "Employee Id", "Last Name", "First Name");
+//            while (results.next())//while there is data in the table
+//            {
+//                //Print the results to the screen.
+//                String id = results.getString("employeeId");
+//                String lname = results.getString("lastName");
+//                String fname = results.getString("firstName");
+//                System.out.printf(formatEmployee, id, lname, fname);
+//            }
+//        } //results should print if no connection found then catch error here
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+    static void Assignment08()
+    {
+        Random rand = new Random();
+        int n = rand.nextInt(50); //get a random value to do a Fibonacci sequence on
+        //create the objects and set n through the constructor
+        RecursiveThread recursive = new RecursiveThread(n);
+        DynamicThread dynamic = new DynamicThread(n);
+        //start the threads with the overridden run function
+        recursive.start();
+        dynamic.start();
     }
 }
 
