@@ -7,7 +7,7 @@ import javax.swing.*;
 public class AssignmentMethods
 {
     static void Assignment02() {
-        ArrayList<Double> list = new ArrayList<Double>(Arrays.asList(1.5, 2.35, -4.7, 0.01)); //creating the ArrayList
+        ArrayList<Double> list = new ArrayList<>(Arrays.asList(1.5, 2.35, -4.7, 0.01)); //creating the ArrayList
         String newHeaderFormat = "-------------------\n| %-16s| \n-------------------\n"; //header formatting
         System.out.printf(newHeaderFormat, "Original List");
         PrintList(list); //calling function to print the ArrayList
@@ -56,9 +56,12 @@ public class AssignmentMethods
     static void Assignment04()
     {
 //readable format for the user to verify the volumes and result
-        String format = "The volume of the cube is %.2f\nThe volume of the cylinder is %.2f\n"
-                + "This means the volume of the cube is %s the cylinder.\n"
-                + "---------------------------------------------------------------\n";
+        String format = """
+                The volume of the cube is %.2f
+                The volume of the cylinder is %.2f
+                This means the volume of the cube is %s the cylinder.
+                ---------------------------------------------------------------
+                """;
         String less = "less than";
         String great = "greater than";
         String equal = "equal to";

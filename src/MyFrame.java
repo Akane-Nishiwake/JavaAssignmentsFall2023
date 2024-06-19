@@ -21,7 +21,7 @@ class MyFrame extends JFrame
         firstNumber = new JTextField();
         secondNumber = new JTextField();
         confirmButton = new JButton("Calculate");
-        dropDownBox = new JComboBox<String>(options);
+        dropDownBox = new JComboBox<>(options);
         result = new JLabel(" ");
 
         //basic exit, title, and layout created
@@ -43,13 +43,7 @@ class MyFrame extends JFrame
 
         //Fourth Row this will "listen" for the action of the Calculate button being clicked to then perform the desired operation
         this.add(new JLabel("Confirm Operation:"));
-        confirmButton.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                CalculateResult();
-            }
-        });
+        confirmButton.addActionListener(e -> CalculateResult());
         this.add(confirmButton);
 
         //Fifth Row this will display the users result of the operation
@@ -68,29 +62,21 @@ class MyFrame extends JFrame
         //grabs the necessary values to initialize the variables
         Double firstNum = Double.parseDouble(firstNumber.getText());
         Double secondNum = Double.parseDouble(secondNumber.getText());
-        Double res = 0.00;
+        double res = 0.00;
         String option = (String) dropDownBox.getSelectedItem();
         //performs the desired operation
-        switch(option)
-        {
-            case "Add":
-                res = firstNum + secondNum;
-                break;
-            case "Subtract":
-                res = firstNum - secondNum;
-                break;
-            case "Multiply":
-                res = firstNum * secondNum;
-                break;
-            case "Division":
-                res = firstNum / secondNum;
-                break;
-            case "Remainder":
-                res = firstNum % secondNum;
-                break;
-        }
+        res = switch (option) {
+            case "Add" -> firstNum + secondNum;
+            case "Subtract" -> firstNum - secondNum;
+            case "Multiply" -> firstNum * secondNum;
+            case "Division" -> firstNum / secondNum;
+            case "Remainder" -> firstNum % secondNum;
+            default -> {
+                yield res;
+            }
+        };
         //sets the result to the result of the operation.
-        result.setText(Double.toString(res));;
+        result.setText(Double.toString(res));
     }
 }
 
