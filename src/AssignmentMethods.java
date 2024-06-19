@@ -1,12 +1,49 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 //import java.sql.*;
 
 public class AssignmentMethods
 {
+    static void Assignment01()
+    {
+        String leftFormat = " | %-8s | %5s  |%n ----------------------%n"; //formatting for header
+        String newFormat = " | %-8.2f | %5.2f |%n ----------------------%n"; //formatting for body
+        System.out.printf(leftFormat, "SALES", "INCOME"); //header
+        for(double i = 1000; i <= 20000; )
+        {
+            double base = 5000;
+            base += computeIncome(i); //adding commission earned to base Salary
+            System.out.printf(newFormat, i, base); //body
+            i += 1000; //adding 1k to each sale
+        }
+    }
+    static double computeIncome(double sales)
+    {
+        double result = 0.00f;
+        //commission rate
+        // 0 <= 5000 = 0.08
+        if(sales <= 5000)
+        {
+            result += ((sales - 0) * 0.08);
+        }
+        //5000.01 <= 10000 = 0.10
+        else if(sales > 5000.00 && sales <= 10000)
+        {
+            result += ((5000) * 0.08); //take out the first 5k at 8%
+            result += ((sales - 5000) * 0.10); //commission the remaining amount at 10%
+        }
+        // x > 10000.01 = 0.12
+        else if(sales > 10000)
+        {
+            result += ((5000) * 0.08); //take out the first 5k at 8%
+            result += ((10000 - 5000) * 0.10); //take out the second 5k at 10%
+            result += ((sales - 10000) * 0.12); //commission the remaining amount at 12%
+        }
+        return result;
+    }
+
     static void Assignment02() {
         ArrayList<Double> list = new ArrayList<>(Arrays.asList(1.5, 2.35, -4.7, 0.01)); //creating the ArrayList
         String newHeaderFormat = "-------------------\n| %-16s| \n-------------------\n"; //header formatting
@@ -56,6 +93,67 @@ public class AssignmentMethods
 
     static void Assignment04()
     {
+        List<Double> myList = new ArrayList<>(); //create list to hold data
+        String myFile = "data.txt"; //give the file name to look for
+        myList = ReadFile(myFile, myList); //call the read file method and fill the List
+        Collections.sort(myList); //sorts the file in ascending order
+        String outputFile = "data-sorted.txt"; //file name of the file to be created/written to
+        WriteFile(outputFile, myList); //Writes the sorted data to the intended file
+    }
+    static List<Double> ReadFile(String myFile, List<Double> myList)
+    {
+        try (BufferedReader read = new BufferedReader(new FileReader(myFile))) //try to read the file
+        {
+            String currentLine; //need this to store the current line
+            while((currentLine = read.readLine()) != null) //store the current line if it is not null
+            {
+                try
+                {
+                    double num = Double.parseDouble(currentLine); //convert string to double
+                    myList.add(num); //add to list
+                }catch(NumberFormatException e) //if we cannot convert throw and exception
+                {
+                    e.printStackTrace();
+                }
+            }
+            read.close(); //close the file
+        } catch (IOException e) //if the file cannot be read throw an exception
+        {
+            e.printStackTrace();
+        }
+        return myList; //return the list
+    }
+    static void WriteFile(String myFile, List<Double> myList)
+    {
+        try(PrintWriter write = new PrintWriter(new FileWriter(myFile))) //creating a new file if needed/creating a object to use to write to the file
+        {
+            for( Double num : myList) //goes through the entire List to print each number to a line in the file
+            {
+                write.println(num.toString());
+            }
+            write.close(); //close the file
+        }catch (IOException e) //exception thrown if file creation or finding fails
+        {
+            e.printStackTrace();
+        }
+    }
+    static void Assignment05()
+    {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                constructGUI();} //calls the constructGUI method
+        });
+    }
+    static void constructGUI() //this method creates a MyFrame object that calls the initialization of my JFrame
+    {
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        MyFrame frame = new MyFrame();
+        frame.setVisible(true);
+
+    }
+
+    static void Assignment06()
+    {
 //readable format for the user to verify the volumes and result
         String format = """
                 The volume of the cube is %.2f
@@ -94,21 +192,6 @@ public class AssignmentMethods
             }
         }
 
-
-    }
-
-    static void Assignment05()
-    {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                constructGUI();} //calls the constructGUI method
-        });
-    }
-    static void constructGUI() //this method creates a MyFrame object that calls the initialization of my JFrame
-    {
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        MyFrame frame = new MyFrame();
-        frame.setVisible(true);
 
     }
 
