@@ -4,5 +4,6 @@ public class Main {
     public static void main(String[] args) {
         AssignmentMethods.Assignment02();
         AssignmentMethods.Assignment03();
+        AssignmentMethods.Assignment04();
     }
 }
