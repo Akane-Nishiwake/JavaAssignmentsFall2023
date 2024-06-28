@@ -149,7 +149,6 @@ public class AssignmentMethods
         JFrame.setDefaultLookAndFeelDecorated(true);
         MyFrame frame = new MyFrame();
         frame.setVisible(true);
-
     }
 
     static void Assignment06()
